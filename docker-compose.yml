@@ -1,0 +1,21 @@
+version: '3.9'
+
+volumes:
+  node_modules_volume:
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      # node_modules用の永続化Volumeを用いて2回目以降のnode_moduleの呼び出しを高速化
+      - node_modules_volume:/app/node_modules
+    command: sh -c "npm start"
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
