@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ResultCreate from "./components/ResultCreate";
-import { create } from "domain";
 
 const App = () => {
   const [result, setResult] = useState([]);
