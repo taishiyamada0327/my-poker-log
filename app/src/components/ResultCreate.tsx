@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from '@mui/material/Button'
 
 type props = {
   onCreate: Function;
@@ -17,12 +18,10 @@ const ResultCreate: React.FC<props> = ({ onCreate }) => {
     setTitle('')
   }
 
-
   return <div>
     <form onSubmit={handleSubmit}>
-      <label>Title</label>
       <input value={title} onChange={handleChange} />
-      <button>Create!</button>
+      <Button variant="text" type="submit" onSubmit={(event) => handleSubmit}>Create</Button>
     </form>
   </div>
 }
