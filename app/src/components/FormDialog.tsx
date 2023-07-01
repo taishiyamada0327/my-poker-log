@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
+import { Label } from '@mui/icons-material';
 
 type props = {
   buttonTitle: String;
@@ -41,8 +42,7 @@ export default function FormDialog (props: props) {
 
   return(
     <div>
-
-      <Button variant="outlined" onClick={() => setDigOpen(true)}>
+      <Button style={{ color: '#b71c1c', backgroundColor: '#FFFFFF' }} variant="contained" onClick={() => setDigOpen(true)}>
         {props.buttonTitle}
       </Button>
       <Dialog
@@ -68,8 +68,8 @@ export default function FormDialog (props: props) {
             </Box>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} type='submit'>OK</Button>
-            <Button onClick={handleClose}>close</Button>
+            <Button style={{ color: '#000000' }} onClick={handleClose} type='submit'>OK</Button>
+            <Button style={{ color: '#000000' }} onClick={handleClose}>close</Button>
           </DialogActions>
         </form >
       </Dialog>
