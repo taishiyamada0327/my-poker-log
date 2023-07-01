@@ -1,28 +1,22 @@
 import { useState } from "react";
 import Button from '@mui/material/Button'
+import FormDialog from "./FormDialog";
 
 type props = {
   onCreate: Function;
 }
 
 const ResultCreate: React.FC<props> = ({ onCreate }) => {
-  const [title, setTitle] = useState('')
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.currentTarget.value);
-  }
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onCreate(title);
-    setTitle('')
-  }
+  const [digOpen, setDigOpen] = useState(false);
 
   return <div>
-    <form onSubmit={handleSubmit}>
-      <input value={title} onChange={handleChange} />
-      <Button variant="text" type="submit" onSubmit={(event) => handleSubmit}>Create</Button>
-    </form>
+    <FormDialog
+      buttonTitle="+ 成績を登録"
+      digTitle="成績を登録"
+      open={digOpen}
+      onSubmit={onCreate}
+      onClose={() => setDigOpen(false)}
+    />
   </div>
 }
 
