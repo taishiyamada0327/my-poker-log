@@ -11,14 +11,12 @@ const ResultCreate: React.FC<props> = ({ onCreate }) => {
 
   return <div>
     <FormDialog
-      title="成績を登録"
-      message="メッセージ本文"
+      buttonTitle="+ 成績を登録"
+      digTitle="成績を登録"
       open={digOpen}
+      onSubmit={onCreate}
       onClose={() => setDigOpen(false)}
     />
-    <Button variant="outlined" onClick={() => setDigOpen(true)}>
-      + 成績を登録
-    </Button>
   </div>
 }
 

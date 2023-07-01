@@ -8,34 +8,71 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
 
-export default function FormDialog(props: any) {
+type props = {
+  buttonTitle: String;
+  digTitle: String;
+  open: boolean;
+  onSubmit: Function;
+  onClose: Function;
+}
 
-  const {
-    title,
-    message,
-    open,
-    onClose
-  } = props
-
+export default function FormDialog (props: props) {
   const [digOpen, setDigOpen] = React.useState(false);
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value);
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    props.onSubmit(value);
+    setValue('');
+    handleClose();
+  }
 
   const handleClose = () => {
     setDigOpen(false);
-    onClose();
+    props.onClose();
   }
 
   // openの値が変化した時
-  React.useEffect(() => setDigOpen(open), [open]);
+  React.useEffect(() => setDigOpen(props.open), [props.open]);
 
   return(
-    <Dialog open={digOpen}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <Box>{message}</Box>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>close</Button>
-      </DialogActions>
-    </Dialog>
+    <div>
+
+      <Button variant="outlined" onClick={() => setDigOpen(true)}>
+        {props.buttonTitle}
+      </Button>
+      <Dialog
+        open={digOpen}
+        fullWidth
+        maxWidth="xs"
+      >
+        <DialogTitle>{props.digTitle}</DialogTitle>
+        <form onSubmit={handleSubmit}>
+          <DialogContent>
+            <Box>
+              <TextField
+                autoFocus
+                value={value}
+                margin='dense'
+                id='message'
+                fullWidth
+                label='test'
+                type="text"
+                variant="standard"
+                onChange={handleChange}
+              />
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} type='submit'>OK</Button>
+            <Button onClick={handleClose}>close</Button>
+          </DialogActions>
+        </form >
+      </Dialog>
+    </div>
   )
 }
