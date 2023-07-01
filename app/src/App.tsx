@@ -22,7 +22,7 @@ export type Results = {
 const App = () => {
   const [results, setResults] = useState<Results[]>([]);
 
-  const createResult = (title: any) => {
+  const createResult = (title: string) => {
     const updateResults = [
       ...results,
       {
